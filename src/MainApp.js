@@ -1,11 +1,8 @@
 import React from 'react';
+import AppRouter from './routers/AppRouter';
 
 function MainApp() {
-  return (
-    <div>
-      <h1>Napptilus!</h1>
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default MainApp;

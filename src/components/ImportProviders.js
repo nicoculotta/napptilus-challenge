@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -12,9 +11,5 @@ function ImportProviders({ children }) {
     </ChakraProvider>
   );
 }
-
-ImportProviders.propTypes = {
-  children: PropTypes.element.isRequired
-};
 
 export default ImportProviders;
