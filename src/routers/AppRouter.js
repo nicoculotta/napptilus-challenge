@@ -11,7 +11,7 @@ function AppRouter() {
       <Header />
       <Routes>
         <Route path="/" element={<ProductList />} />
-        <Route path="detail" element={<ProductDetail />} />
+        <Route path="detail/:id" element={<ProductDetail />} />
       </Routes>
     </BrowserRouter>
   );
