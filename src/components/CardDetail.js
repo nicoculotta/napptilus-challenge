@@ -8,7 +8,8 @@ import {
   Table,
   Tbody,
   Tr,
-  Td
+  Td,
+  Button
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -25,9 +26,9 @@ function CardDetail({
   primaryCamera,
   secondaryCmera,
   dimentions,
-  weigth
+  weigth,
+  onClick
 }) {
-  console.log(primaryCamera);
   const formatPrice = Number(price).toLocaleString('de-DE', {
     style: 'currency',
     currency: 'EUR'
@@ -108,6 +109,9 @@ function CardDetail({
               </Tr>
             </Tbody>
           </Table>
+        </Box>
+        <Box mt={4}>
+          <Button onClick={onClick}>Add to Cart</Button>
         </Box>
       </Box>
     </SimpleGrid>

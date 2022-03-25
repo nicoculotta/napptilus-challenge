@@ -8,6 +8,7 @@ import {
   Box,
   Text
 } from '@chakra-ui/react';
+import Cart from './Cart';
 
 function Header() {
   return (
@@ -36,7 +37,7 @@ function Header() {
             </BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
-        <Box>Carrito</Box>
+        <Cart />
       </Container>
     </Box>
   );

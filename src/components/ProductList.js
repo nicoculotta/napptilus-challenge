@@ -4,7 +4,6 @@ import {
   Heading,
   Flex,
   Input,
-  Spinner,
   Text
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
@@ -13,19 +12,11 @@ import CardItem from './CardItem';
 
 function ProductList() {
   const [searchFilter, setSearchFilter] = useState('');
-  const { data, isLoading } = useFilterProduct(searchFilter);
+  const { data } = useFilterProduct(searchFilter);
 
   const handleSearch = (e) => {
     setSearchFilter(e.target.value);
   };
-
-  if (isLoading) {
-    return (
-      <Flex justifyContent="center" alignItems="center" h="50vh">
-        <Spinner size="lg" color="red.500" />
-      </Flex>
-    );
-  }
 
   return (
     <Container maxW="container.xl" pt="70px">
@@ -41,12 +32,14 @@ function ProductList() {
           w="250px"
           value={searchFilter}
           placeholder="Search by Brand or Model"
-          onChange={handleSearch}
+          onChange={(e) => handleSearch(e)}
         />
       </Flex>
 
       {data && data.length === 0 && (
-        <Text fontSize="2xl">We cant find {searchFilter} in our products</Text>
+        <Text fontSize="2xl">
+          We can&apos;t find &quot;{searchFilter}&quot; in our products
+        </Text>
       )}
 
       <SimpleGrid columns={[1, 2, 4]} spacing="24px">

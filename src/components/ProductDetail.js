@@ -3,10 +3,17 @@ import { useParams } from 'react-router';
 import { Container, Flex, Spinner } from '@chakra-ui/react';
 import useProductById from '../hooks/useProductsById';
 import CardDetail from './CardDetail';
+import useCart from '../hooks/useCart';
 
 function ProductDetail() {
   const { id } = useParams();
   const { data: product, isLoading } = useProductById(id);
+  const cart = useCart();
+
+  const handleAddToCart = () => {
+    cart.mutate({ id, colorCode: 1, storageCode: 2 });
+    console.log(cart);
+  };
 
   if (isLoading) {
     return (
@@ -32,6 +39,7 @@ function ProductDetail() {
         secondaryCmera={product?.data.secondaryCmera}
         dimentions={product?.data.dimentions}
         weigth={product?.data.weigth}
+        onClick={handleAddToCart}
       />
     </Container>
   );
