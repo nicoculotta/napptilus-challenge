@@ -24,15 +24,24 @@ function ProductList() {
         direction={['column', null, 'row']}
         justifyContent="space-between"
         alignItems="center"
-        py={6}
+        pt={[4, 8, 12]}
+        pb={[4, 6, 8]}
       >
-        <Heading>New Products for sale</Heading>
+        <Heading
+          fontSize={['2xl', '3xl', '4xl']}
+          mb={[2, 4, null]}
+          color="gray.300"
+        >
+          Choose your next phone
+        </Heading>
         <Input
           borderColor="gray.300"
           w="250px"
           value={searchFilter}
           placeholder="Search by Brand or Model"
           onChange={(e) => handleSearch(e)}
+          borderRadius="50px"
+          fontSize="sm"
         />
       </Flex>
 

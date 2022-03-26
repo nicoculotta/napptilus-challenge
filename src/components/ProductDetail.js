@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router';
 import { Container, Flex, Spinner } from '@chakra-ui/react';
 import useProductById from '../hooks/useProductsById';
-import CardDetail from './CardDetail';
 import addToCart from '../hooks/addToCart';
+import CardDetail from './CardDetail';
 import { AppContext } from '../context/AppContext';
 
 function ProductDetail() {
@@ -17,14 +17,23 @@ function ProductDetail() {
       colorCode: 1,
       storageCode: 2
     });
-    setNumber((prev) => prev + 1);
-    console.log(resp);
+    const currentCart = localStorage.getItem('cart_count');
+    if (currentCart) {
+      localStorage.setItem(
+        'cart_count',
+        parseInt(resp.count, 10) + parseInt(currentCart, 10)
+      );
+      setNumber(localStorage.getItem('cart_count'));
+    } else {
+      localStorage.setItem('cart_count', parseInt(resp.count, 10));
+      setNumber(localStorage.getItem('cart_count'));
+    }
   };
 
   if (isLoading) {
     return (
-      <Flex justifyContent="center" alignItems="center" h="50vh">
-        <Spinner size="lg" color="red.500" />
+      <Flex justifyContent="center" alignItems="center" h="80vh">
+        <Spinner size="lg" color="cyan.400" />
       </Flex>
     );
   }
@@ -45,6 +54,7 @@ function ProductDetail() {
         secondaryCmera={product?.secondaryCmera}
         dimentions={product?.dimentions}
         weigth={product?.weigth}
+        options={product?.options}
         onClick={() => handleAddToCart(id)}
       />
     </Container>

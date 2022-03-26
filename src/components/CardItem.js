@@ -34,10 +34,22 @@ function CardItem({ id, image, brand, model, price }) {
       borderColor="gray.100"
       onClick={() => setItemSelected(`${brand} - ${model}`)}
     >
-      <Image m="0 auto" src={image} />
-      <Badge>{brand}</Badge>
-      <Heading size="md">{model}</Heading>
-      <Text>{formatPrice}</Text>
+      <Box p={6}>
+        <Image m="0 auto" src={image} />
+      </Box>
+      <Badge
+        mb={2}
+        bgColor="cyan.100"
+        color="blue.900"
+        borderRadius="10px"
+        px={2}
+      >
+        {brand}
+      </Badge>
+      <Heading size="sm">{model}</Heading>
+      <Text fontWeight="300" fontSize={['lg', 'lg', '2xl']}>
+        {formatPrice}
+      </Text>
     </MotionBox>
   );
 }

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
-import { Container, Box, Text } from '@chakra-ui/react';
+import { Container, Box, Image } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import Cart from './Cart';
 import { AppContext } from '../context/AppContext';
@@ -9,7 +9,11 @@ import Bread from './Bread';
 const MotionHeader = motion(Box);
 
 function Header() {
-  const { number, setItemSelected } = useContext(AppContext);
+  const { number, setNumber, setItemSelected } = useContext(AppContext);
+
+  useEffect(() => {
+    setNumber(localStorage.getItem('cart_count'));
+  }, []);
 
   const animation = {
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
@@ -22,7 +26,7 @@ function Header() {
       initial="hidden"
       animate="visible"
       bgColor="white"
-      boxShadow="0px 20px 20px rgba(0,0,0,0.05)"
+      boxShadow="0px 15px 30px rgba(0,0,0,0.05)"
       position="fixed"
       w="100%"
       zIndex="2"
@@ -32,13 +36,18 @@ function Header() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        h="70px"
       >
-        <ReachLink to="/" onClick={() => setItemSelected(null)}>
-          <Text fontSize="22px" fontWeight="bold" py={4}>
-            PhoneStore
-          </Text>
-        </ReachLink>
-        <Bread />
+        <Box display="flex" alignItems="center">
+          <Box w="120px" mr="24px">
+            <ReachLink to="/" onClick={() => setItemSelected(null)}>
+              <Image src="/assets/logo.svg" />
+            </ReachLink>
+          </Box>
+          <Box display={['none', 'block']}>
+            <Bread />
+          </Box>
+        </Box>
         <Cart number={number} />
       </Container>
     </MotionHeader>

@@ -10,11 +10,18 @@ import {
   Tbody,
   Tr,
   Td,
-  Button
+  Button,
+  Flex
 } from '@chakra-ui/react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { FiShoppingCart } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import { AppContext } from '../context/AppContext';
+import Colors from './Colors';
+import Storage from './Storage';
+
+const DetailMotion = motion(SimpleGrid);
 
 function CardDetail({
   image,
@@ -30,6 +37,7 @@ function CardDetail({
   secondaryCmera,
   dimentions,
   weigth,
+  options,
   onClick
 }) {
   const { setItemSelected } = useContext(AppContext);
@@ -39,10 +47,12 @@ function CardDetail({
   });
 
   return (
-    <SimpleGrid
+    <DetailMotion
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
       columns={[1, 2]}
       bgColor="white"
-      p={8}
+      p={[4, 8]}
       borderRadius="xl"
       alignItems="center"
       position="relative"
@@ -51,7 +61,7 @@ function CardDetail({
         position="absolute"
         top="24px"
         left="24px"
-        fontSize="2xl"
+        fontSize="xl"
         bgColor="gray.100"
         p={3}
         borderRadius="100%"
@@ -61,11 +71,21 @@ function CardDetail({
       >
         <BsArrowLeft />
       </Box>
-      <Image w="30%" m="0 auto" src={image} />
+      <Image w="40%" m="0 auto" src={image} />
       <Box>
-        <Badge fontSize="lg">{brand}</Badge>
-        <Heading size="xl">{model}</Heading>
-        <Text fontSize="2xl" pb={2}>
+        <Badge
+          bgColor="cyan.100"
+          px={4}
+          borderRadius="20px"
+          color="blue.900"
+          fontSize="sm"
+        >
+          {brand}
+        </Badge>
+        <Heading size="xl" mt={2}>
+          {model}
+        </Heading>
+        <Text fontSize="2xl" pb={4}>
           {formatPrice}
         </Text>
 
@@ -129,11 +149,34 @@ function CardDetail({
             </Tbody>
           </Table>
         </Box>
+
+        <Flex my={4}>
+          <Box mr={6}>
+            <Text>Colors:</Text>
+            <Colors colors={options.colors} />
+          </Box>
+          <Box>
+            <Text>Storage:</Text>
+            <Storage storage={options.storages} />
+          </Box>
+        </Flex>
         <Box mt={4}>
-          <Button onClick={onClick}>Add to Cart</Button>
+          <Button
+            onClick={onClick}
+            colorScheme="cyan"
+            color="white"
+            px={8}
+            borderRadius="30px"
+            w={['100%', 'auto']}
+          >
+            <Box mr={2}>
+              <FiShoppingCart />
+            </Box>
+            Add to Cart
+          </Button>
         </Box>
       </Box>
-    </SimpleGrid>
+    </DetailMotion>
   );
 }
 
