@@ -2,7 +2,7 @@ import { Badge, Flex, Box } from '@chakra-ui/react';
 import React from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
 
-function Cart({ number = 0 }) {
+function Cart({ number }) {
   return (
     <Flex
       fontSize="xl"
@@ -16,7 +16,7 @@ function Cart({ number = 0 }) {
         <FiShoppingCart />
       </Box>
       <Badge bgColor="white" fontSize="md" borderRadius="100%" px={2}>
-        {number}
+        {number || 0}
       </Badge>
     </Flex>
   );
