@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
-import {
-  Container,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Box,
-  Text
-} from '@chakra-ui/react';
+import { Container, Box, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import Cart from './Cart';
+import { AppContext } from '../context/AppContext';
+import Bread from './Bread';
+
+const MotionHeader = motion(Box);
 
 function Header() {
+  const { number, setItemSelected } = useContext(AppContext);
+
+  const animation = {
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+    hidden: { y: -100, opacity: 0 }
+  };
+
   return (
-    <Box
+    <MotionHeader
+      variants={animation}
+      initial="hidden"
+      animate="visible"
       bgColor="white"
       boxShadow="0px 20px 20px rgba(0,0,0,0.05)"
       position="fixed"
@@ -25,21 +33,15 @@ function Header() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <ReachLink to="/">
+        <ReachLink to="/" onClick={() => setItemSelected(null)}>
           <Text fontSize="22px" fontWeight="bold" py={4}>
             PhoneStore
           </Text>
         </ReachLink>
-        <Breadcrumb spacing="8px" separator="-">
-          <BreadcrumbItem>
-            <BreadcrumbLink as={ReachLink} to="/detail">
-              Detail Link
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
-        <Cart />
+        <Bread />
+        <Cart number={number} />
       </Container>
-    </Box>
+    </MotionHeader>
   );
 }
 

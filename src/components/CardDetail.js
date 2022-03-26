@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import {
   SimpleGrid,
   Image,
@@ -11,7 +12,9 @@ import {
   Td,
   Button
 } from '@chakra-ui/react';
-import React from 'react';
+import { BsArrowLeft } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
 function CardDetail({
   image,
@@ -29,6 +32,7 @@ function CardDetail({
   weigth,
   onClick
 }) {
+  const { setItemSelected } = useContext(AppContext);
   const formatPrice = Number(price).toLocaleString('de-DE', {
     style: 'currency',
     currency: 'EUR'
@@ -41,8 +45,23 @@ function CardDetail({
       p={8}
       borderRadius="xl"
       alignItems="center"
+      position="relative"
     >
-      <Image w="40%" m="0 auto" src={image} />
+      <Box
+        position="absolute"
+        top="24px"
+        left="24px"
+        fontSize="2xl"
+        bgColor="gray.100"
+        p={3}
+        borderRadius="100%"
+        as={Link}
+        to="/"
+        onClick={() => setItemSelected(null)}
+      >
+        <BsArrowLeft />
+      </Box>
+      <Image w="30%" m="0 auto" src={image} />
       <Box>
         <Badge fontSize="lg">{brand}</Badge>
         <Heading size="xl">{model}</Heading>
