@@ -13,7 +13,7 @@ function Header() {
 
   useEffect(() => {
     setNumber(localStorage.getItem('cart_count'));
-  }, []);
+  }, [setNumber]);
 
   const animation = {
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },

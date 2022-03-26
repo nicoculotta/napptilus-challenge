@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 function Colors({ colors }) {
   const [selected, setSelected] = useState(1000);
-  console.log(colors);
+
   return (
     <Box display="flex" py={2}>
       {colors.map((color) => (
